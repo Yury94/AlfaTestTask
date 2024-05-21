@@ -8,7 +8,6 @@ public class HomePage {
     private static final By anyProductWithoutDiscount = By.xpath("//*[@class='wrap-ribbon d-none']/parent::div[@class='note-poster']/following::div[1]/button");//кнопка Купить для любого НЕакционного товара
     private static final By anyProductWithDiscount = By.cssSelector(".hasDiscount .actionBuyProduct.btn.btn-primary.mt-3");//кнопка Купить для любого акционного товара
     protected static final By ValueOfBasketText = By.cssSelector(".basket-count-items.badge.badge-primary");
-    private static final By clearBasketLocator = By.cssSelector(".btn.btn-danger");//локатор кнопки очистить таблицу
 
     //Task 4
     private static final By buttonBuy = By.cssSelector(".note-list.row>:nth-child(1) .actionBuyProduct");//кнопка Купить по индексу 1
@@ -29,11 +28,6 @@ public class HomePage {
 
     public static void buttonBasket(WebDriver driver) {
         driver.findElement(buttonBasketLocator).click();
-    }
-
-    public static void deleteAllDataFromBasket(WebDriver driver) {
-        driver.findElement(buttonBasketLocator).click();
-        driver.findElement(clearBasketLocator).click();
     }
 
     public static void selectAnyProductWithoutDiscount(WebDriver driver) {//задача 2

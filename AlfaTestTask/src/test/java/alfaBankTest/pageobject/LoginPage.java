@@ -14,9 +14,10 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    public void attemptLogin (String username, String password) {
+    public LoginPage attemptLogin(String username, String password) {
         driver.findElement(emailInputLocator).sendKeys(username);
         driver.findElement(passwordInputLocator).sendKeys(password);
         driver.findElement(loginButtonLocator).click();
+        return new LoginPage(driver);
     }
 }

@@ -2,15 +2,13 @@ package alfaBankTest.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HomePage {
-
     private final By buttonBasketLocator = By.xpath("//*[@id='dropdownBasket']");
     private final By anyProductWithoutDiscount = By.xpath("//*[@class='wrap-ribbon d-none']/parent::div[@class='note-poster']/following::div[1]/button");//кнопка Купить для любого НЕакционного товара
     private final By anyProductWithDiscount = By.cssSelector(".hasDiscount .actionBuyProduct.btn.btn-primary.mt-3");//кнопка Купить для любого акционного товара
     protected final By ValueOfBasketText = By.cssSelector(".basket-count-items.badge.badge-primary");
-    private By clearBasketLocator = By.cssSelector(".btn.btn-danger");//локатор кнопки очистить таблицу
-
     //Task 4
     private By buttonBuy = By.cssSelector(".note-list.row>:nth-child(1) .actionBuyProduct");//кнопка Купить по индексу 1
     private By buttonBuy2 = By.cssSelector(".note-list.row>:nth-child(4) .actionBuyProduct");//кнопка Купить по индексу 4
@@ -32,29 +30,30 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
-
-    public void buttonBasket() {
+    public WebElement getProductCount(){
+        return driver.findElement(ValueOfBasketText);
+    }
+    public HomePage buttonBasket() {
         driver.findElement(buttonBasketLocator).click();
+        return new HomePage(driver);
     }
 
-    public void deleteAllDataFromBasket() {
-        driver.findElement(buttonBasketLocator).click();
-        driver.findElement(clearBasketLocator).click();
-    }
-
-    public void selectAnyProductWithoutDiscount() {//задача 2
+    public HomePage selectAnyProductWithoutDiscount() {//задача 2
         driver.findElement(anyProductWithoutDiscount).click();
+        return new HomePage(driver);
     }
 
-    public void selectAnyProductWithDiscount() {//задача 3
+    public HomePage selectAnyProductWithDiscount() {//задача 3
         driver.findElement(anyProductWithDiscount).click();
+        return new HomePage(driver);
     }
 
-    public void changePageFrom1To2() {
+    public HomePage changePageFrom1To2() {
         driver.findElement(paginationSecondPageLocator).click();//переход на страницу 2
+        return new HomePage(driver);
     }
 
-    public void selectNineAnyProducts(String value1, String value2, String value3) {//задача 4
+    public HomePage selectNineAnyProducts(String value1, String value2, String value3) {//задача 4
         driver.findElement(anyFirstProducts).clear();
         driver.findElement(anyFirstProducts).sendKeys(value1);
         driver.findElement(buttonBuy).click();
@@ -64,9 +63,10 @@ public class HomePage {
         driver.findElement(anyThreadProducts).clear();
         driver.findElement(anyThreadProducts).sendKeys(value3);
         driver.findElement(buttonBuy3).click();
+        return new HomePage(driver);
     }
 
-    public void selectNineAnyDiscountAndNotDiscountProducts(String discountProduct, String notDiscountProduct) {//задача 4.1
+    public HomePage selectNineAnyDiscountAndNotDiscountProducts(String discountProduct, String notDiscountProduct) {//задача 4.1
         driver.findElement(anyDiscountProduct).clear();//очистка поля ввода акционного товара
         driver.findElement(anyDiscountProduct).sendKeys(discountProduct);//ввод данных в поле ввода акционного товара
         driver.findElement(anyProductWithDiscount).click();
@@ -74,11 +74,13 @@ public class HomePage {
         driver.findElement(anyNotDiscountProduct).clear();//очистка поля ввода НЕакционного товара
         driver.findElement(anyNotDiscountProduct).sendKeys(notDiscountProduct);//ввод данных в поле ввода НЕакционного товара
         driver.findElement(anyProductWithoutDiscount).click();
+        return new HomePage(driver);
     }
 
-    public void selectNineAnyProductWithDiscount(String value) {//задача 5
+    public HomePage selectNineAnyProductWithDiscount(String value) {//задача 5
         driver.findElement(ProductWithDiscount).clear();
         driver.findElement(ProductWithDiscount).sendKeys(value);
         driver.findElement(buttonBuy2).click();
+        return new HomePage(driver);
     }
 }
